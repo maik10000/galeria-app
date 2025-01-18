@@ -5,6 +5,9 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';
 import store, {persistor} from './Redux/store.js'
 import { BrowserRouter as Routes } from 'react-router-dom';
+import { AxInterceptor } from './middleware/axios.interceptor.js';
+
+AxInterceptor()
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
