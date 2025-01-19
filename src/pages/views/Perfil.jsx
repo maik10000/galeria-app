@@ -33,7 +33,7 @@ export default function Perfil() {
             <div className="w-1/2 my-auto py-6 flex flex-col shadow-xl justify-center gap-2 p-5 border-2 border-gray-200 rounded-lg">
                 <div className="flex flex-col pb-3">
                     <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
-                        First Name
+                        Nombres y Apellidos
                     </dt>
                     <dd className="text-lg font-semibold">{user.name}</dd>
                 </div>
