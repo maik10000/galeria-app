@@ -49,13 +49,14 @@ function Login() {
 
             }else{
 
-               const res =  await callEndpoint(login(form))
+                await callEndpoint(login(form)).then(res=>{
+                        if(res) dispatch(setUser(adapterResLogin(res)))
+               }).then(res => {
+
+                    if(res) location.href = '/perfil/galeria/'+res?.name?.replace(' ','-')
+               })
                
-                if(res){
-                    console.log(res.name)
-                    dispatch(setUser(adapterResLogin(res)))
-                    location.href = '/perfil/galeria/'+res.name.replace(' ','-')
-                }
+                
                 
             }
            

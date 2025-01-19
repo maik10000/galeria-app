@@ -1,10 +1,14 @@
 import  AxiosResponse  from "axios";
 import { useEffect, useState } from "react";
 import adapError from "../util/adaptarErroAxios";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../Redux/userSlice";
 
 const useFetchAndLoad = () => {
     const [loading, setLoading] = useState(false);
     const [mesaErros, setErrors] = useState([]);
+    const dispatch = useDispatch()
+
     let controller;
 
     const callEndpoint = async (axiosCall) => {
@@ -18,8 +22,12 @@ const useFetchAndLoad = () => {
             const res = await axiosCall.call;
             result = res.data
         } catch (err) {
+
             setLoading(false);
-            console.log(err)
+            if(err.status === 401){
+                dispatch(clearUser())
+            }
+            console.log(err);
             setErrors(adapError(err.response))
             return;
         }

@@ -2,7 +2,7 @@
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const valetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
 const valnumeros = /^\d+$/;
-const valemail = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ@.\s]+$/;
+const valemail = /^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑüÜ@.\s]+$/;
 
 const valSoloLetras = (texto) => {
 

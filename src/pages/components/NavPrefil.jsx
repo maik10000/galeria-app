@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import useFetchAndLoad from "../../hooks/useFetch";
+import { logout } from "../../services/privateServices";
+import { clearUser } from "../../Redux/userSlice";
 const NavPerfil = () => {
 
   const user = useSelector((state)=>state.user)
-  
+  const { loading, callEndpoint } = useFetchAndLoad()
+  const dispatch = useDispatch()
+
+  const logOut = async () => {
+
+    await callEndpoint(logout()).then(res =>{
+          dispatch(clearUser())     
+    }).then(() => {
+         location.href = "/"
+    })
+  }
 
   return (
     <header className={`flex w-[100%] items-center overflow-hidden`}>
@@ -30,8 +42,8 @@ const NavPerfil = () => {
               </nav>
             </div>
             <div className=" w-[50%] justify-end pr-16 sm:flex lg:pr-0">
-              <button  
-                className="w-[30%] bg-amber-600 hover:bg-amber-700 text-white font-medium py-2.5 px-2.5 rounded-lg transition-colors"
+              <button  onClick={logOut}
+                className="w-[30%] bg-rose-600 hover:bg-rose-700 text-white font-medium py-2.5 px-2.5 rounded-lg transition-colors"
               >
                 Cerrar Sesion
               </button>

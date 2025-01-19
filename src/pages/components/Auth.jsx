@@ -5,22 +5,18 @@ import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { expToken } from "../../Redux/userSlice";
 
+
 export default function Auth({children, type = "no-auth"}){
 
     const user = useSelector((estado)=> estado.user);
-    const dispatch = useDispatch()
-    
-    useEffect(()=>{
-        console.log(type)
-        console.log('asd')
-    })
-    
+  
+      console.log(user.active)
 
     switch (type) {
       case 'auth':
          return  user.active ? children : <Navigate to="/" replace />;
       case 'no-auth':    
-         return !user.active ? children : <Navigate to={`/${user.name.replace(' ','-')}`}  />;
+         return !user.active ? children : <Navigate to={`/perfil/galeria/${user.name.replace(' ','-')}`}  />;
       default:
         break
     }

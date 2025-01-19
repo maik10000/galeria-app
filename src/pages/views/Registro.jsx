@@ -5,7 +5,6 @@ import { tieneValoresNulosOVacios, valCaracEmail, valSoloLetras, valSoloNumeros 
 import { register } from "../../services/privateServices"
 import adapterResLogin from "../../util/adapterRespLogin"
 import { useDispatch } from "react-redux"
-import adapterUSER from "../../util/adapterUser"
 import { setUser } from "../../Redux/userSlice"
 
 export default function Registro() {
@@ -14,7 +13,7 @@ export default function Registro() {
     const dispatch = useDispatch()
     const { loading, callEndpoint, mesaErros } = useFetchAndLoad()
     const [mensaje, setMensaje] = useState(undefined)
-    const [form, setForm] = useState({ name: '', email: '', age: '', phone: '', password: '', password_confirmation: '' })
+    const [form, setForm] = useState({ name: '', email: '', age: '', phone: '', password: '', password_confirmation:'' })
 
 
     const validator = (target) => {
@@ -30,9 +29,8 @@ export default function Registro() {
 
             case 'email':
                 return valCaracEmail(target.value)
-
             default:
-                break;
+                return target.value
         }
     }
 
@@ -52,13 +50,16 @@ export default function Registro() {
         e.preventDefault()
         if(tieneValoresNulosOVacios(form)){
 
-           const res =  await callEndpoint(register(form))
+            await callEndpoint(register(form)).then(res=>{
 
-           if(res){
-            
-               dispatch(setUser(adapterResLogin(res)))
-               navigate(`/${res.name}`)
-            }
+                if(res){
+                    console.log(res)
+                    dispatch(setUser(adapterResLogin(res)))
+                    location.href = '/perfil/galeria/'+res.name.replace(' ','-')
+                }
+           })
+
+          
 
         }else{
             setMensaje(<div className="font-bold" style={{color:'#ef4444'}} >Llene todos los campos</div>)
@@ -69,7 +70,7 @@ export default function Registro() {
     return (
         <div className="w-screen h-screen  flex justify-center items-center">
             <div className="w-[30%] min-h-[50%] bg-white rounded-xl shadow-[0_10px_60px_-15px_rgba(0,0,0,0.8)] p-8">
-                {mesaErros?.length !== 0 ? <AlertLabel type="danger" mess={mesaErros} title="Error al iniciar sesión" /> : ''}
+               
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Registro</h2>
                 <form onSubmit={registro} className="space-y-4">
@@ -150,6 +151,7 @@ export default function Registro() {
                             required="Ingrese una contraseña minimo 8 caracteres"
                             name="password"
                             autoComplete="new-password"
+                            value={form.password}
                         />
                     </div>
                     <div>
@@ -165,6 +167,7 @@ export default function Registro() {
                             required="Confirme su contraseña"
                             name="password_confirmation"
                             autoComplete="shipping current-password webauthn"
+                            value={form.password_confirmation}
                         />
                     </div>
                     {mensaje}

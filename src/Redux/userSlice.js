@@ -5,7 +5,7 @@ const  initialState = {
     name: '',
     age:0,
     email: '',
-    photos:[],
+    phone:'',
     token:'',
     token_type:'',
     expires:0,
