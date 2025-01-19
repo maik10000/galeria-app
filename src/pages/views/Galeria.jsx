@@ -42,6 +42,7 @@ export default function Galeria() {
     const dispat = useDispatch()
 
     const getMe = async ()  =>{
+       
         await callEndpoint(getPerfil()).then(res=>{
                if(res) dispat(setUser(adapterUSER(res)))
         })

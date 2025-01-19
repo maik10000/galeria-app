@@ -12,6 +12,6 @@ const MensajeTriste = ({texto, mensaje, action}) => {
       </button>
     </div>
   </div>)
-} 
+}
 
 export default MensajeTriste;

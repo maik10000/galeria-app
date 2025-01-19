@@ -74,14 +74,21 @@ export default function Modal({ action, data = {title:''} }) {
 
 
     return (
-        <div
-            className="fixed inset-0 bg-gray-800 bg-opacity-50 z-40 flex items-center justify-center"
+        <div  className="fixed inset-0 bg-gray-800 bg-opacity-50 z-40 flex items-center justify-center"
         >
             <div className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Agregar Imágenes</h2>
-                <p className="text-gray-600 mb-6">
-                    Sube tus imágenes a la galería seleccionándolas desde tu dispositivo.
-                </p>
+              {  !data.id?
+                <>
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Agregar Imágenes</h2>
+                    <p className="text-gray-600 mb-6">
+                        Sube tu imágenes a la galería.
+                    </p>
+                </>
+                :
+                <>
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Actualizar</h2>
+                   
+                </>}
 
                 <form onSubmit={uploadImage} method="post" encType="multipart/form-data" >
                     <div className="relative z-0 w-full mb-5 group">

@@ -19,6 +19,25 @@ export const register = (data) =>{
     }
 
 }
+
+export const updateUser = (data) =>{
+
+    const controller  = loadAbort()
+    return{
+        call:axios.put('http://127.0.0.1:8000/api/auth/user/edit',data, {signal:controller.signal}),
+        controller
+    }
+
+}
+
+export const resetPassword = (data) => {
+    console.log(data)
+    const controller = loadAbort()
+    return{
+        call: axios.post('http://127.0.0.1:8000/api/auth/user/reset-password',data,{signal:controller.signal}),
+        controller
+    }
+}
  
 export const getPerfil  = () => {
 
