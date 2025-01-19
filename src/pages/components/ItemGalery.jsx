@@ -73,7 +73,7 @@ const ItemGalery = ({ img }) => {
                     
                     <h4 className="text-center mt-4 font-semibold">{img.title}</h4>
                     <p className="text-gray-700 italic text-[12px] p-5 leading-relaxed">
-                    Descripcion:  {img?.description} {ruta}
+                    Descripcion:  {img?.description}
                     </p>
                 </div>
             </div>
